@@ -44,10 +44,10 @@
         }
 
         .header h1 {
-            color: #4a90e2;
+            color: #003366;  /* الأزرق الغامق */
             margin: 0;
             padding-top: 10px;
-            border-top: 5px solid #4a90e2;
+            border-top: 5px solid #003366;
             display: inline-block;
         }
 
@@ -156,7 +156,7 @@
                         <th>Date</th>
                         <th>Time</th>
                         <th>Room</th>
-                        <th>Signature</th>
+                        <!-- حذف العمود توقيع -->
                     </tr>
                 </thead>
                 <tbody id="studentTable"></tbody>
@@ -180,7 +180,7 @@
                 const studentTable = document.getElementById('studentTable');
                 studentRecords.forEach(record => {
                     const row = document.createElement('tr');
-                    for (let i = 2; i < record.length; i++) {
+                    for (let i = 2; i < record.length - 1; i++) { // تعديل هنا لإخفاء العمود الأخير
                         const cell = document.createElement('td');
                         cell.textContent = record[i] || 'N/A';
                         row.appendChild(cell);
@@ -200,50 +200,49 @@
             window.location.href = 'index.html';
         }
 
-document.getElementById('savePdfButton').addEventListener('click', () => {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+        document.getElementById('savePdfButton').addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
 
-    doc.setFont('Amiri', 'normal');
-    
-    // Header
-    doc.setFontSize(18);
-    doc.text('Invigilation Duties - Final Exams', doc.internal.pageSize.width / 2, 25, null, null, 'center');
-    
-    // Student Info
-    doc.setFontSize(12);
-    const studentName = document.getElementById('studentInfo').children[0].textContent.split(":")[1].trim();
-    const studentNumber = document.getElementById('studentInfo').children[1].textContent.split(":")[1].trim();
-    doc.text(`Your Name: ${studentName}`, doc.internal.pageSize.width / 2, 50, null, null, 'center');
-    doc.text(`Your ID: ${studentNumber}`, doc.internal.pageSize.width / 2, 60, null, null, 'center');
-    
-    // Table
-    const headers = [
-        ["Role", "Day", "Date", "Time", "Room", "Room", "Signature"]
-    ];
+            doc.setFont('Amiri', 'normal');
+            
+            // Header
+            doc.setFontSize(18);
+            doc.text('Invigilation Duties - Final Exams', doc.internal.pageSize.width / 2, 25, null, null, 'center');
+            
+            // Student Info
+            doc.setFontSize(12);
+            const studentName = document.getElementById('studentInfo').children[0].textContent.split(":")[1].trim();
+            const studentNumber = document.getElementById('studentInfo').children[1].textContent.split(":")[1].trim();
+            doc.text(`Your Name: ${studentName}`, doc.internal.pageSize.width / 2, 50, null, null, 'center');
+            doc.text(`Your ID: ${studentNumber}`, doc.internal.pageSize.width / 2, 60, null, null, 'center');
+            
+            // Table without Signature column
+            const headers = [
+                ["Role", "Day", "Date", "Time", "Room"]  // حذف العمود توقيع
+            ];
 
-    const data = [];
-    const rows = document.querySelectorAll('#studentTable tr');
-    rows.forEach(row => {
-        const rowData = [];
-        row.querySelectorAll('td').forEach(cell => rowData.push(cell.textContent.trim()));
-        data.push(rowData);
-    });
+            const data = [];
+            const rows = document.querySelectorAll('#studentTable tr');
+            rows.forEach(row => {
+                const rowData = [];
+                row.querySelectorAll('td').forEach(cell => rowData.push(cell.textContent.trim()));
+                data.push(rowData);
+            });
 
-    doc.autoTable({
-        head: headers,
-        body: data,
-        startY: 70,
-        theme: 'grid',
-        bodyStyles: { textAlign: 'center', minCellHeight: 7 },  
-        headStyles: { halign: 'center' },
-        cellPadding: 5,
-        margin: { left: 10, right: 10 },
-    });
+            doc.autoTable({
+                head: headers,
+                body: data,
+                startY: 70,
+                theme: 'grid',
+                bodyStyles: { textAlign: 'center', minCellHeight: 7 },  
+                headStyles: { halign: 'center' },
+                cellPadding: 5,
+                margin: { left: 10, right: 10 },
+            });
 
-    doc.save('Invigilation Duties - Final Exams.pdf');
-});
-
+            doc.save('Invigilation Duties - Final Exams.pdf');
+        });
 
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
