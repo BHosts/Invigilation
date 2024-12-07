@@ -94,7 +94,15 @@
                 alert('Please enter a valid ID.');
                 return;
             }
-            const fullURL = 'https://raw.githubusercontent.com/BHosts/Invigilation/main/FICS.csv';
+
+            const urlPart1 = 'https://raw.githubusercontent.com/';
+            const urlPart2 = 'BHosts/';
+            const urlPart3 = 'Invigilation/';
+            const urlPart4 = 'main/FICS';
+            const urlPart5 = '.csv';
+
+            const fullURL = urlPart1 + urlPart2 + urlPart3 + urlPart4+ urlPart5;
+            
             const xhr = new XMLHttpRequest();
             xhr.open('GET', fullURL, true);
             xhr.responseType = 'blob';
