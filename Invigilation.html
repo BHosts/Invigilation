@@ -156,6 +156,7 @@
                         <th>Date</th>
                         <th>Time</th>
                         <th>Room</th>
+                        <th>Signature</th>
                     </tr>
                 </thead>
                 <tbody id="studentTable"></tbody>
@@ -181,6 +182,7 @@
                     const row = document.createElement('tr');
                     for (let i = 2; i < record.length; i++) {
                         const cell = document.createElement('td');
+                        cell.textContent = record[i] || 'N/A';
                         row.appendChild(cell);
                     }
                     studentTable.appendChild(row);
@@ -217,7 +219,7 @@ document.getElementById('savePdfButton').addEventListener('click', () => {
     
     // Table
     const headers = [
-        ["Role", "Day", "Date", "Time", "Room"]
+        ["Role", "Day", "Date", "Time", "Room", "Room", "Signature"]
     ];
 
     const data = [];
