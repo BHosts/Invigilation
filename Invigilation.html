@@ -207,18 +207,15 @@ document.getElementById('savePdfButton').addEventListener('click', () => {
 
     doc.setFont('Amiri', 'normal');
     
-    // Header
     doc.setFontSize(18);
     doc.text('Invigilation Duties - Final Exams', doc.internal.pageSize.width / 2, 25, null, null, 'center');
     
-    // Student Info
     doc.setFontSize(12);
     const studentName = document.getElementById('studentInfo').children[0].textContent.split(":")[1].trim();
     const studentNumber = document.getElementById('studentInfo').children[1].textContent.split(":")[1].trim();
     doc.text(`Your Name: ${studentName}`, doc.internal.pageSize.width / 2, 50, null, null, 'center');
     doc.text(`Your ID: ${studentNumber}`, doc.internal.pageSize.width / 2, 60, null, null, 'center');
     
-    // Table without Signature column
     const headers = [
         ["Role", "Day", "Date", "Time", "Room"]
     ];
@@ -238,12 +235,11 @@ document.getElementById('savePdfButton').addEventListener('click', () => {
         theme: 'grid',
         bodyStyles: { 
             textAlign: 'center', 
-            minCellHeight: 7,
-            valign: 'middle'
+            valign: 'middle'      
         },
         headStyles: { 
-            halign: 'center',
-            valign: 'middle' 
+            halign: 'center',     
+            valign: 'middle'      
         },
         cellPadding: 5,
         margin: { left: 10, right: 10 },
@@ -251,6 +247,7 @@ document.getElementById('savePdfButton').addEventListener('click', () => {
 
     doc.save('Invigilation Duties - Final Exams.pdf');
 });
+
 
 
         document.addEventListener('contextmenu', function(e) {
