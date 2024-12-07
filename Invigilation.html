@@ -237,11 +237,13 @@ document.getElementById('savePdfButton').addEventListener('click', () => {
         startY: 70,
         theme: 'grid',
         bodyStyles: { 
-            textAlign: 'center',  // توسيط النص في الخلايا
-            minCellHeight: 7
+            textAlign: 'center', 
+            minCellHeight: 7,
+            valign: 'middle'
         },
         headStyles: { 
-            halign: 'center',  // توسيط النص في الهيدر
+            halign: 'center',
+            valign: 'middle' 
         },
         cellPadding: 5,
         margin: { left: 10, right: 10 },
