@@ -206,16 +206,16 @@ document.getElementById('savePdfButton').addEventListener('click', () => {
     const doc = new jsPDF();
 
     doc.setFont('Amiri', 'normal');
-    
+
     doc.setFontSize(18);
     doc.text('Invigilation Duties - Final Exams', doc.internal.pageSize.width / 2, 25, null, null, 'center');
-    
+
     doc.setFontSize(12);
     const studentName = document.getElementById('studentInfo').children[0].textContent.split(":")[1].trim();
     const studentNumber = document.getElementById('studentInfo').children[1].textContent.split(":")[1].trim();
     doc.text(`Your Name: ${studentName}`, doc.internal.pageSize.width / 2, 50, null, null, 'center');
     doc.text(`Your ID: ${studentNumber}`, doc.internal.pageSize.width / 2, 60, null, null, 'center');
-    
+
     const headers = [
         ["Role", "Day", "Date", "Time", "Room"]
     ];
@@ -233,15 +233,19 @@ document.getElementById('savePdfButton').addEventListener('click', () => {
         body: data,
         startY: 70,
         theme: 'grid',
-        bodyStyles: { 
-            textAlign: 'center', 
-            valign: 'middle'      
-        },
         headStyles: { 
             halign: 'center', 
             valign: 'middle', 
-            fillColor: [0, 51, 102], // اللون الأزرق الغامق
-            textColor: [255, 255, 255] // اللون الأبيض للنص
+            fillColor: [0, 51, 102],
+            textColor: [255, 255, 255]
+        },
+        bodyStyles: { 
+            halign: 'center', 
+            valign: 'middle' 
+        },
+        styles: {
+            halign: 'center',
+            valign: 'middle'
         },
         cellPadding: 5,
         margin: { left: 10, right: 10 },
@@ -249,7 +253,6 @@ document.getElementById('savePdfButton').addEventListener('click', () => {
 
     doc.save('Invigilation Duties - Final Exams.pdf');
 });
-
 
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
