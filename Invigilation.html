@@ -141,6 +141,14 @@
                 width: 200px;
             }
         }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #003366;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -169,6 +177,10 @@
             <button id="backButton" onclick="goBack()">Back</button>
         </div>
     </div>
+
+    <footer>
+        <p>© 2024 University. All Rights Reserved.</p>
+    </footer>
 
     <script>
         const allStudents = JSON.parse(localStorage.getItem('allStudents'));
