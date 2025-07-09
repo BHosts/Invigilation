@@ -109,21 +109,14 @@
         }
 
         td {
-            background-color: #f9f9f9;
+            background-color: #ffffff;
         }
 
         tr:nth-child(even) td {
-            background-color: #e8f4ff;
+            background-color: #dbe9f6;
         }
 
-        th {
-            white-space: nowrap;
-            padding: 10px 20px;
-            text-overflow: ellipsis;
-            overflow: hidden;
-        }
-
-        td:nth-child(4), th {
+        th, td:nth-child(4) {
             white-space: nowrap;
             padding: 10px 20px;
             text-overflow: ellipsis;
@@ -223,7 +216,6 @@
             const doc = new jsPDF();
 
             doc.setFont('Amiri', 'normal');
-
             doc.setFontSize(18);
             doc.text('Invigilation Duties - Midterm Exams- Summer School 2025', doc.internal.pageSize.width / 2, 25, null, null, 'center');
 
@@ -233,10 +225,7 @@
             doc.text(`Your Name: ${studentName}`, doc.internal.pageSize.width / 2, 50, null, null, 'center');
             doc.text(`Your ID: ${studentNumber}`, doc.internal.pageSize.width / 2, 60, null, null, 'center');
 
-            const headers = [
-                ["Role", "Day", "Date", "Time", "Room"]
-            ];
-
+            const headers = [["Role", "Day", "Date", "Time", "Room"]];
             const data = [];
             const rows = document.querySelectorAll('#studentTable tr');
             rows.forEach(row => {
@@ -258,7 +247,9 @@
                 },
                 bodyStyles: { 
                     halign: 'center', 
-                    valign: 'middle' 
+                    valign: 'middle',
+                    lineColor: [200, 200, 200],  // حدود خفيفة
+                    lineWidth: 0.2               // رقة الحدود
                 },
                 styles: {
                     halign: 'center',
@@ -266,6 +257,15 @@
                 },
                 cellPadding: 5,
                 margin: { left: 10, right: 10 },
+                didParseCell: function (data) {
+                    if (data.section === 'body') {
+                        if (data.row.index % 2 === 0) {
+                            data.cell.styles.fillColor = [255, 255, 255]; // أبيض
+                        } else {
+                            data.cell.styles.fillColor = [219, 233, 246]; // كحلي فاتح
+                        }
+                    }
+                }
             });
 
             doc.save('Invigilation Duties - Midterm Exams- Summer School 2025.pdf');
