@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invigilation Duties - Midterm Exams- Summer School 2025</title>
+    <title>Invigilation Schedule for Midterm Exams- Summer School 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -156,7 +156,8 @@
     <div class="container">
         <div class="header">
             <img src="Logo4.jpg" alt="University Logo">
-            <h1>Invigilation Duties - Midterm Exams- Summer School 2025</h1>
+            <h1>Invigilation Schedule for Midterm Exams</h1>
+            <h1>Summer School 2025</h1>
         </div>
         <div class="student-info" id="studentInfo"></div>
         <div style="width: 100%; overflow-x: auto;">
@@ -217,8 +218,12 @@
 
             doc.setFont('Amiri', 'normal');
             doc.setFontSize(18);
-            doc.text('Invigilation Duties - Midterm Exams- Summer School 2025', doc.internal.pageSize.width / 2, 25, null, null, 'center');
+            doc.text('Invigilation Schedule for Midterm Exams', doc.internal.pageSize.width / 2, 25, null, null, 'center');
 
+            doc.setFont('Amiri', 'normal');
+            doc.setFontSize(15);
+            doc.text('Summer School 2025', doc.internal.pageSize.width / 2, 25, null, null, 'center');
+        
             doc.setFontSize(12);
             const studentName = document.getElementById('studentInfo').children[0].textContent.split(":")[1].trim();
             const studentNumber = document.getElementById('studentInfo').children[1].textContent.split(":")[1].trim();
